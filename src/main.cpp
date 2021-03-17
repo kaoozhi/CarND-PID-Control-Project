@@ -34,11 +34,12 @@ int main() {
   uWS::Hub h;
 
   PID pid;
-  double throttle = 0.35;
+  
+  
   /**
    * TODO: Initialize the pid variable.
    */
-  pid.Init(0.092, 0.00005, 0.5);
+  pid.Init(0.116, 0.000034, 0.92*3.5);
 
   h.onMessage([&pid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, 
                      uWS::OpCode opCode) {
@@ -59,6 +60,7 @@ int main() {
           double speed = std::stod(j[1]["speed"].get<string>());
           double angle = std::stod(j[1]["steering_angle"].get<string>());
           double steer_value;
+          const double throttle_sp = 0.6;
           double throttle;
           /**
            * TODO: Calculate steering value here, remember the steering value is
@@ -71,20 +73,18 @@ int main() {
           if (steer_value > 1) steer_value = 1;
           if (steer_value < -1) steer_value = -1;
           if (fabs(cte) > .4) 
-          {
-          throttle = .35 - fabs(cte) * 0.25;
-          // throttle = fmax(0.075, throttle);
-          }
+            {
+            throttle = throttle_sp - fabs(cte) * 0.25;
+            }
           else if (fabs(cte) > 2) 
-          {
-          throttle = 0.35 - fabs(cte) * 0.5;
-          
-          }
+            {
+            throttle = throttle_sp - fabs(cte) * 0.5;
+            
+            }
           else
-          { 
-            throttle = 0.35 - fabs(cte) * 0.1;
-            // throttle = fmax(0.075, thrott);
-          }
+            { 
+              throttle = throttle_sp - fabs(cte) * 0.1;
+            }
           throttle = fmax(0.05, throttle);
           
           // DEBUG
