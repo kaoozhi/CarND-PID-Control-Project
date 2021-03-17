@@ -15,9 +15,9 @@ The PID implementation follows the base algorithm presented in the lessons. As t
 
   The major efforts of the project focus on PID parameters tuning.
 
-  * Kp - proportional gain will be the first parameter to be set who determines controller's dynamic, larger gain leads to more responsive controller behaviour but also creates larger overshoot and oscillation so destabilise the system.
+  * Kp - proportional gain will be the first parameter to be set who determines controller's dynamic, larger gain leads to more responsive controller behaviour but also creates larger overshoot and oscillation so destabilises the system.
 
-  * Ki - integral gain will help the controller reach the precision by eliminate the steady-state error but in the mean time destabilise as well the system
+  * Ki - integral gain will help the controller reach the precision by eliminating the steady-state error but in the mean time destabilise as well the system
 
   * Kd - derivative gain predicts controller's behaviour in the future will contribute to reduce the overshoot so improves the setting time and stability, but large Kd could increase the sensitivity to perturbations.  
 
